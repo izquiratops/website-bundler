@@ -1,0 +1,34 @@
+{
+				Name: "html-asset",
+				Setup: func(build api.PluginBuild) {
+					build.OnResolve(api.OnResolveOptions{Filter: `\.html$`},
+						func(args api.OnResolveArgs) (api.OnResolveResult, error) {
+							path := filepath.Join(args.ResolveDir, args.Path)
+
+							return api.OnResolveResult{
+								Path:      path,
+								Namespace: "html-asset",
+							}, nil
+						})
+
+					build.OnLoad(api.OnLoadOptions{Filter: `\.html$`, Namespace: "html-asset"},
+						func(args api.OnLoadArgs) (api.OnLoadResult, error) {
+							content, err := os.ReadFile(args.Path)
+							if err != nil {
+								return api.OnLoadResult{}, err
+							}
+
+							distFilename := generateHash(args.Path, content)
+							outputPath := filepath.Join(distDirPath, distFilename)
+							if err := os.WriteFile(outputPath, content, 0644); err != nil {
+								return api.OnLoadResult{}, err
+							}
+
+							contents := fmt.Sprintf("export default %q", distFilename)
+
+							return api.OnLoadResult{
+								Contents: &contents,
+								Loader:   api.LoaderJS,
+							}, nil
+						})
+				},
