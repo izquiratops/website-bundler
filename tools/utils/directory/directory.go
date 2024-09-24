@@ -35,13 +35,11 @@ func MoveTo(entryPath, destPath string) error {
 func Clean(distLocalPath string) {
 	whitelist := []string{"index.html", "favicon.ico"}
 
-	// Check if dist directory exists
 	if _, err := os.Stat(distLocalPath); os.IsNotExist(err) {
 		message := fmt.Sprintf("directory %s does not exist.\n", distLocalPath)
 		log.Fatal(message)
 	}
 
-	// Walk through the dist directory
 	err := filepath.Walk(distLocalPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -52,7 +50,6 @@ func Clean(distLocalPath string) {
 			return nil
 		}
 
-		// Remove file or directory
 		if err := os.RemoveAll(path); err != nil {
 			return fmt.Errorf("failed to remove %s: %v", path, err)
 		}

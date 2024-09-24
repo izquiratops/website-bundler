@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 
 	"github.com/evanw/esbuild/pkg/api"
-	"github.com/izquiratops/bundler-tools/tools/utils/directory"
-	"github.com/izquiratops/bundler-tools/tools/utils/hash"
+	"github.com/izquiratops/dobunezumi/tools/utils/directory"
+	"github.com/izquiratops/dobunezumi/tools/utils/hash"
 
 	"github.com/tdewolff/minify/v2"
 	tdewolff "github.com/tdewolff/minify/v2/html"

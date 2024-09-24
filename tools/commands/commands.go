@@ -6,10 +6,10 @@ import (
 
 	"github.com/evanw/esbuild/pkg/api"
 
-	cssPlugin "github.com/izquiratops/bundler-tools/tools/plugins/css"
-	htmlPlugin "github.com/izquiratops/bundler-tools/tools/plugins/html"
-	httpPlugin "github.com/izquiratops/bundler-tools/tools/plugins/http"
-	"github.com/izquiratops/bundler-tools/tools/utils/directory"
+	cssPlugin "github.com/izquiratops/dobunezumi/tools/plugins/css"
+	htmlPlugin "github.com/izquiratops/dobunezumi/tools/plugins/html"
+	httpPlugin "github.com/izquiratops/dobunezumi/tools/plugins/http"
+	"github.com/izquiratops/dobunezumi/tools/utils/directory"
 )
 
 func Build(entryFilePath, distLocalPath string, enableMinify bool) {

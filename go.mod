@@ -1,4 +1,4 @@
-module github.com/izquiratops/bundler-tools
+module github.com/izquiratops/dobunezumi
 
 go 1.22.4
 
