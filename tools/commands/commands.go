@@ -22,6 +22,9 @@ func Build(entryFilePath, distLocalPath string, enableMinify bool) {
 		MinifySyntax:      enableMinify,
 		Outdir:            distLocalPath,
 		Write:             true,
+		Loader: map[string]api.Loader{
+			".wgsl": api.LoaderText,
+		},
 		Plugins: []api.Plugin{
 			httpPlugin.Plugin(),
 			htmlPlugin.Plugin(distLocalPath),
@@ -45,6 +48,9 @@ func Serve(entryFilePath, distLocalPath string, enableMinify bool) error {
 		MinifySyntax:      enableMinify,
 		Outdir:            distLocalPath,
 		Write:             true,
+		Loader: map[string]api.Loader{
+			".wgsl": api.LoaderText,
+		},
 		Plugins: []api.Plugin{
 			httpPlugin.Plugin(),
 			htmlPlugin.Plugin(distLocalPath),
