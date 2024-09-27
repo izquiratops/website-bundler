@@ -1,4 +1,5 @@
 import htmlPath from './index.html';
+import './style.css';
 
 fetch(htmlPath)
     .then(response => response.text())
