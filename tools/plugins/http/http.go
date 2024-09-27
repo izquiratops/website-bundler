@@ -11,9 +11,17 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-var esmImportRegex = regexp.MustCompile(`^https?://esm.sh`)
+type HttpPlugin struct {
+	esmImportPattern *regexp.Regexp
+}
 
-func onResolve(args api.OnResolveArgs) (api.OnResolveResult, error) {
+func NewHttpPlugin() *HttpPlugin {
+	return &HttpPlugin{
+		esmImportPattern: regexp.MustCompile(`^https?://esm.sh`),
+	}
+}
+
+func (p *HttpPlugin) onResolve(args api.OnResolveArgs) (api.OnResolveResult, error) {
 	base, err := url.Parse(args.Importer)
 	if err != nil {
 		return api.OnResolveResult{}, err
@@ -31,7 +39,7 @@ func onResolve(args api.OnResolveArgs) (api.OnResolveResult, error) {
 	}, nil
 }
 
-func onLoad(args api.OnLoadArgs) (api.OnLoadResult, error) {
+func (p *HttpPlugin) onLoad(args api.OnLoadArgs) (api.OnLoadResult, error) {
 	fmt.Printf("Fetching %s\n", args.Path)
 
 	resp, err := http.Get(args.Path)
@@ -60,16 +68,18 @@ func onLoad(args api.OnLoadArgs) (api.OnLoadResult, error) {
 }
 
 func Plugin() api.Plugin {
+	plugin := NewHttpPlugin()
+
 	return api.Plugin{
 		Name: "http-import",
 		Setup: func(build api.PluginBuild) {
 			build.OnResolve(
-				api.OnResolveOptions{Filter: esmImportRegex.String()},
-				onResolve,
+				api.OnResolveOptions{Filter: plugin.esmImportPattern.String()},
+				plugin.onResolve,
 			)
 			build.OnLoad(
 				api.OnLoadOptions{Filter: ".*", Namespace: "http-url"},
-				onLoad,
+				plugin.onLoad,
 			)
 		},
 	}

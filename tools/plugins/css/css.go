@@ -9,37 +9,47 @@ import (
 	"github.com/tdewolff/minify/v2/html"
 )
 
-func onLoadCss(m *minify.M) func(args api.OnLoadArgs) (api.OnLoadResult, error) {
-	return func(args api.OnLoadArgs) (api.OnLoadResult, error) {
-		srcFilePath := filepath.Clean(args.Path)
+type CssAssetPlugin struct {
+	minifier *minify.M
+}
 
-		content, err := os.ReadFile(srcFilePath)
-		if err != nil {
-			return api.OnLoadResult{}, err
-		}
+func NewCssAssetPlugin() *CssAssetPlugin {
+	m := minify.New()
+	m.AddFunc("text/css", html.Minify)
 
-		minified, err := m.String("text/css", string(content))
-		if err != nil {
-			return api.OnLoadResult{}, err
-		}
-
-		return api.OnLoadResult{
-			Contents: &minified,
-			Loader:   api.LoaderText,
-		}, nil
+	return &CssAssetPlugin{
+		minifier: m,
 	}
 }
 
+func (p *CssAssetPlugin) onLoadCss(args api.OnLoadArgs) (api.OnLoadResult, error) {
+	srcFilePath := filepath.Clean(args.Path)
+
+	content, err := os.ReadFile(srcFilePath)
+	if err != nil {
+		return api.OnLoadResult{}, err
+	}
+
+	minified, err := p.minifier.String("text/css", string(content))
+	if err != nil {
+		return api.OnLoadResult{}, err
+	}
+
+	return api.OnLoadResult{
+		Contents: &minified,
+		Loader:   api.LoaderCSS,
+	}, nil
+}
+
 func Plugin() api.Plugin {
-	m := minify.New()
-	m.AddFunc("text/css", html.Minify)
+	plugin := NewCssAssetPlugin()
 
 	return api.Plugin{
 		Name: "css",
 		Setup: func(build api.PluginBuild) {
 			build.OnLoad(
 				api.OnLoadOptions{Filter: `\.css$`},
-				onLoadCss(m),
+				plugin.onLoadCss,
 			)
 		},
 	}
