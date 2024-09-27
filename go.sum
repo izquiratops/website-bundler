@@ -1,5 +1,5 @@
-github.com/evanw/esbuild v0.23.0 h1:PLUwTn2pzQfIBRrMKcD3M0g1ALOKIHMDefdFCk7avwM=
-github.com/evanw/esbuild v0.23.0/go.mod h1:D2vIQZqV/vIf/VRHtViaUtViZmG7o+kKmlBfVQuRi48=
+github.com/evanw/esbuild v0.24.0 h1:GZ78naTLp7FKr+K7eNuM/SLs5maeiHYRPsTg6kmdsSE=
+github.com/evanw/esbuild v0.24.0/go.mod h1:D2vIQZqV/vIf/VRHtViaUtViZmG7o+kKmlBfVQuRi48=
 github.com/tdewolff/minify/v2 v2.20.37 h1:Q97cx4STXCh1dlWDlNHZniE8BJ2EBL0+2b0n92BJQhw=
 github.com/tdewolff/minify/v2 v2.20.37/go.mod h1:L1VYef/jwKw6Wwyk5A+T0mBjjn3mMPgmjjA688RNsxU=
 github.com/tdewolff/parse/v2 v2.7.15 h1:hysDXtdGZIRF5UZXwpfn3ZWRbm+ru4l53/ajBRGpCTw=
