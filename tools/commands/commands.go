@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/evanw/esbuild/pkg/api"
 
@@ -36,7 +37,8 @@ func Build(entryFilePath, distLocalPath string, enableMinify bool) {
 		log.Fatal(result.Errors)
 	}
 
-	fmt.Printf("build successfully done\n%s", result.Metafile)
+	os.WriteFile("meta.json", []byte(result.Metafile), 0644)
+	fmt.Printf("build successfully done\n")
 }
 
 func Serve(entryFilePath, distLocalPath string, enableMinify bool) error {

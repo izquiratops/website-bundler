@@ -60,7 +60,7 @@ func (p *HtmlAssetPlugin) findRelativeDistPath(htmlAbsPath, assetLocalPath strin
 func (p *HtmlAssetPlugin) processHtmlNode(n *html.Node, htmlAbsPath string) error {
 	if n.Type == html.ElementNode && n.Data == "img" {
 		for i, attr := range n.Attr {
-			if attr.Key == "src" && filepath.IsLocal(attr.Val) {
+			if attr.Key == "src" && !filepath.IsAbs(attr.Val) {
 				var err error
 				n.Attr[i].Val, err = p.findRelativeDistPath(htmlAbsPath, attr.Val)
 				if err != nil {
