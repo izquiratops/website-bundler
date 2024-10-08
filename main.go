@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/izquiratops/dobunezumi/tools/commands"
+	"github.com/izquiratops/dobunezumi/src/commands"
 )
 
 type BundlerFlags struct {

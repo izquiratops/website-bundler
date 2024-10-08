@@ -7,10 +7,10 @@ import (
 
 	"github.com/evanw/esbuild/pkg/api"
 
-	cssPlugin "github.com/izquiratops/dobunezumi/tools/plugins/css"
-	htmlPlugin "github.com/izquiratops/dobunezumi/tools/plugins/html"
-	httpPlugin "github.com/izquiratops/dobunezumi/tools/plugins/http"
-	"github.com/izquiratops/dobunezumi/tools/utils/directory"
+	cssPlugin "github.com/izquiratops/dobunezumi/src/plugins/css"
+	htmlPlugin "github.com/izquiratops/dobunezumi/src/plugins/html"
+	httpPlugin "github.com/izquiratops/dobunezumi/src/plugins/http"
+	"github.com/izquiratops/dobunezumi/src/utils/directory"
 )
 
 func Build(entryFilePath, distLocalPath string, enableMinify bool) {
