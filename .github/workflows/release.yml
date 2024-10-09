@@ -6,8 +6,7 @@ on:
       - created
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write
 
 jobs:
   build:
