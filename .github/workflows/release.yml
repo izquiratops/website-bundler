@@ -28,7 +28,7 @@ jobs:
           echo "Tag version: ${{ github.event.release.tag_name }}"
 
       - name: Build binaries
-        run: ../scripts/build-executables.sh ${{ github.event.release.tag_name }}
+        run: ./.github/scripts/build-executables.sh ${{ github.event.release.tag_name }}
 
       - name: Upload the binaries
         uses: svenstaro/upload-release-action@v2
