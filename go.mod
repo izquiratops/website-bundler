@@ -4,11 +4,11 @@ go 1.22.4
 
 require (
 	github.com/evanw/esbuild v0.24.0
-	github.com/tdewolff/minify/v2 v2.20.37
+	github.com/tdewolff/minify/v2 v2.21.0
 )
 
 require (
-	github.com/tdewolff/parse/v2 v2.7.15 // indirect
+	github.com/tdewolff/parse/v2 v2.7.17 // indirect
 	golang.org/x/net v0.30.0
 	golang.org/x/sys v0.26.0 // indirect
 )
